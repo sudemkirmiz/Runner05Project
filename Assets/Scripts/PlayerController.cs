@@ -1,110 +1,148 @@
-using UnityEditor.Experimental.GraphView;
+ï»¿using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header ("Elements")]
     [SerializeField] Rigidbody rb;
     [SerializeField] Animator myAnim;
+    [Header ("Settings")]
+    [Tooltip("bu deÄŸiÅŸken oyuncunun hÄ±zÄ±nÄ± ifade eder")] //speed Ã¼zerine gelince yazacak ipucu
     [SerializeField] public float speed;
+    [Tooltip("bu deÄŸiÅŸken saÄŸa sola kayma birimini ifade eder")]
     [SerializeField] public float shift=2;
+    [Tooltip("bool ile karakter kontrolÃ¼nde saÄŸa sola orta konumunu ayarlama")]
     [SerializeField] public bool isLeft, isMiddle, isRight;
+    [HideInInspector] public string denemeforgizleme; //gizleme1
+    [System.NonSerialized] public string denemeforgizleme2; //gizleme2
 
     void Start()
     {
-        isMiddle = true; // Baþlangýçta karakter ortadadýr
+        isMiddle = true; // BaÅŸlangÄ±Ã§ta karakter ortadadÄ±r
         //transform.position=new Vector3 (0, 0, 5);
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);//Karakteri sürekli olarak ileri (Z ekseni) yönde hareket ettirir
+        // transform.Translate(Vector3.forward * speed * Time.deltaTime);//Karakteri sÃ¼rekli olarak ileri (Z ekseni) yÃ¶nde hareket ettirir
 
-        // Eðer A tuþuna veya Sol Ok tuþuna basýlýrsa VE þu anda en solda deðilse
-        if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) && isLeft == false)
+        MoveCharacter();
+
+        karakterHareket();
+
+
+        //1. YÃ–NTEM
+        // EÄŸer A tuÅŸuna veya Sol Ok tuÅŸuna basÄ±lÄ±rsa VE ÅŸu anda en solda deÄŸilse
+        /*if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) && isLeft == false)
         {
-            // Eðer karakter ortadaysa, sola geç
+            // EÄŸer karakter ortadaysa, sola geÃ§
             if (isMiddle)
             {
-                isLeft = true;       // Artýk karakter solda
-                isMiddle = false;    // Ortada deðil
+                isLeft = true;       // ArtÄ±k karakter solda
+                isMiddle = false;    // Ortada deÄŸil
             }
-            // Eðer karakter saðda ise, önce orta konuma geç
+            // EÄŸer karakter saÄŸda ise, Ã¶nce orta konuma geÃ§
             else if (isRight)
             {
-                isMiddle = true;     // Artýk karakter ortada
-                isRight = false;     // Saðda deðil
+                isMiddle = true;     // ArtÄ±k karakter ortada
+                isRight = false;     // SaÄŸda deÄŸil
             }
 
-            // X ekseninde sola doðru (negatif yön) shift kadar kaydýr
+            // X ekseninde sola doÄŸru (negatif yÃ¶n) shift kadar kaydÄ±r
             transform.Translate(new Vector3(-shift, 0, 0));
         }
-        // Eðer D tuþuna veya Sað Ok tuþuna basýlýrsa VE þu anda en saðda deðilse
+        // EÄŸer D tuÅŸuna veya SaÄŸ Ok tuÅŸuna basÄ±lÄ±rsa VE ÅŸu anda en saÄŸda deÄŸilse
         else if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) && isRight == false)
         {
-            // Eðer karakter ortadaysa, saða geç
+            // EÄŸer karakter ortadaysa, saÄŸa geÃ§
             if (isMiddle)
             {
-                isRight = true;      // Artýk karakter saðda
-                isMiddle = false;    // Ortada deðil
+                isRight = true;      // ArtÄ±k karakter saÄŸda
+                isMiddle = false;    // Ortada deÄŸil
             }
-            // Eðer karakter solda ise, önce orta konuma geç
+            // EÄŸer karakter solda ise, Ã¶nce orta konuma geÃ§
             else if (isLeft)
             {
-                isMiddle = true;     // Artýk karakter ortada
-                isLeft = false;      // Solda deðil
+                isMiddle = true;     // ArtÄ±k karakter ortada
+                isLeft = false;      // Solda deÄŸil
             }
 
-            // X ekseninde saða doðru (pozitif yön) shift kadar kaydýr
+            // X ekseninde saÄŸa doÄŸru (pozitif yÃ¶n) shift kadar kaydÄ±r
             transform.Translate(new Vector3(shift, 0, 0));
-        } //isLeft, isMiddle, isRight: Karakterin þu an hangi þeritte olduðunu kontrol eder.
+        } //isLeft, isMiddle, isRight: Karakterin ÅŸu an hangi ÅŸeritte olduÄŸunu kontrol eder.
+    } */
+        //[SerializeField] public bool isLeft, isMiddle, isRight;===>bunlarÄ± en baÅŸta tanÄ±mladÄ±m
+
+
+
+        /*transform.Translate(Vector3.forward * speed * Time.deltaTime);
+
+        if (Input.GetKeyDown(KeyCode.A) && transform.position.x > -0.5f)
+        {
+            transform.Translate(new Vector3 (-shift, 0, 0));
+        }
+        else if (Input.GetKeyDown(KeyCode.D) && transform.position.x < 0.5f)
+        {
+            transform.Translate(shift,0,0);
+        }*/
+
+        //nesneyi hareket ettirmenin 2 yolu biri fizik vererek diÄŸeri translate;
+
+        // rb.MovePosition(transform.position+Vector3.forward*speed*Time.deltaTime);//nesnenin ÅŸu anki konumuna, ileri yÃ¶nde kÃ¼Ã§Ã¼k bir hareket vektÃ¶rÃ¼ ekliyor ve
+        //Rigidbody'nin MovePosition fonksiyonuyla onu fizik kurallarÄ±na uygun bir ÅŸekilde yeni konuma taÅŸÄ±yor.
+
+        //transform.Translate(Vector3.forward*speed*Time.deltaTime);  //Time.deltaTime->FPS gÃ¶re sabit hÄ±z saÄŸlar transform.Translate(...)->Nesneyi hareket ettirir
+        //Vector3.forward->nesnenin z ekseni yÃ¶nÃ¼nÃ¼ temsil eder (ileri yÃ¶n).
+
+        /* if (Input.GetKey(KeyCode.W)) 
+         {
+             myAnim.SetBool("run", true);
+
+         }
+         else if(Input.GetKeyUp(KeyCode.W))
+         {
+             myAnim.SetBool ("run", false);
+         }
+         if (Input.GetKeyDown(KeyCode.Space))
+         {
+             myAnim.SetBool("JUMP", true);
+         }
+         else if (Input.GetKeyUp(KeyCode.Space)) 
+         { 
+             myAnim.SetBool("JUMP",false);
+         } */
+
+     
+
     }
-    //[SerializeField] public bool isLeft, isMiddle, isRight;===>bunlarý en baþta tanýmladým
-
-
-
-    /*transform.Translate(Vector3.forward * speed * Time.deltaTime);
-
-    if (Input.GetKeyDown(KeyCode.A) && transform.position.x > -0.5f)
-    {
-        transform.Translate(new Vector3 (-shift, 0, 0));
-    }
-    else if (Input.GetKeyDown(KeyCode.D) && transform.position.x < 0.5f)
-    {
-        transform.Translate(shift,0,0);
-    }*/
-
-    //nesneyi hareket ettirmenin 2 yolu biri fizik vererek diðeri translate;
-
-    // rb.MovePosition(transform.position+Vector3.forward*speed*Time.deltaTime);//nesnenin þu anki konumuna, ileri yönde küçük bir hareket vektörü ekliyor ve
-    //Rigidbody'nin MovePosition fonksiyonuyla onu fizik kurallarýna uygun bir þekilde yeni konuma taþýyor.
-
-    //transform.Translate(Vector3.forward*speed*Time.deltaTime);  //Time.deltaTime->FPS göre sabit hýz saðlar transform.Translate(...)->Nesneyi hareket ettirir
-    //Vector3.forward->nesnenin z ekseni yönünü temsil eder (ileri yön).
-
-    /* if (Input.GetKey(KeyCode.W)) 
-     {
-         myAnim.SetBool("run", true);
-
-     }
-     else if(Input.GetKeyUp(KeyCode.W))
-     {
-         myAnim.SetBool ("run", false);
-     }
-     if (Input.GetKeyDown(KeyCode.Space))
-     {
-         myAnim.SetBool("JUMP", true);
-     }
-     else if (Input.GetKeyUp(KeyCode.Space)) 
-     { 
-         myAnim.SetBool("JUMP",false);
-     } */
-
-}
-    /*private void FixedUpdate() //fizik hesaplamalarý için özel olarak kullanýlan bir güncelleme metodudur.
-                                //Her karede deðil, sabit zaman aralýklarýyla (örneðin her 0.02 saniyede bir) çalýþýr.
-                                //Bu yüzden Rigidbody ile yapýlan hareketler her zaman FixedUpdate içinde yapýlmalýdýr.
+    /*private void FixedUpdate() //fizik hesaplamalarÄ± iÃ§in Ã¶zel olarak kullanÄ±lan bir gÃ¼ncelleme metodudur.
+                                //Her karede deÄŸil, sabit zaman aralÄ±klarÄ±yla (Ã¶rneÄŸin her 0.02 saniyede bir) Ã§alÄ±ÅŸÄ±r.
+                                //Bu yÃ¼zden Rigidbody ile yapÄ±lan hareketler her zaman FixedUpdate iÃ§inde yapÄ±lmalÄ±dÄ±r.
     {
         rb.MovePosition(transform.position + Vector3.forward * speed * Time.deltaTime);
     } */
+    void karakterHareket()
+    {
+        // programa Ã¼rettirdigimiz metod
+    }
+
+    void MoveCharacter()
+    {
+        #region karakter sinirlama
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        #endregion
+    }
+    //oncollisionenter=>fiziksel Ã§arpÄ±ÅŸmalarÄ± algÄ±layan Ã¶zel bir fonksiyondur.baÅŸka bir Collider ile Ã§arpÄ±ÅŸma olduÄŸunda otomatik olarak Ã§aÄŸrÄ±lÄ±r.Scriptin
+    //baÄŸlÄ± olduÄŸu GameObject'te Collider bileÅŸeni bulunmalÄ± (Ã¶rneÄŸin: BoxCollider, SphereCollider vs.) AyrÄ±ca Rigidbody bileÅŸeni olmalÄ±(dinamik fizik iÃ§in).
+    private void OnCollisionEnter(Collision other)//Bu fonksiyon, bir Rigidbody'ye sahip obje baÅŸka bir Collider'la Ã§arpÄ±ÅŸtÄ±ÄŸÄ±nda otomatik olarak Ã§alÄ±ÅŸÄ±r.other->other, Ã§arpÄ±ÅŸtÄ±ÄŸÄ±n nesneyle ilgili tÃ¼m bilgileri iÃ§erir.
+    {
+        //Debug.Log("Ã§arpÄ±ÅŸtÄ±k");
+        if (other.gameObject.CompareTag("obstacle"))
+        {
+            Debug.Log("Ã§arpÄ±ÅŸtÄ±k" +other.gameObject.name);
+           
+        }
+    }
+
 }
