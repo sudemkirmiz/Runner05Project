@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using DG.Tweening;
+using System.Runtime.CompilerServices;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -27,8 +28,6 @@ public class PlayerController : MonoBehaviour
         //transform.position=new Vector3 (0, 0, 5);
         myAnim.SetBool("run", true);
     }
-
-    // Update is called once per frame
     void Update()
     {
         // transform.Translate(Vector3.forward * speed * Time.deltaTime);//Karakteri sürekli olarak ileri (Z ekseni) yönde hareket ettirir
@@ -143,11 +142,14 @@ public class PlayerController : MonoBehaviour
         // 1.yöntem
         if (Input.GetKeyDown(KeyCode.A) && transform.position.x > -0.5f)
         {
-            transform.Translate(new Vector3(-shift, 0, 0));
+
+            //transform.Translate(new Vector3(-shift, 0, 0));
+            transform.DOMoveX(transform.position.x - shift, 0.5f);
         }
         else if (Input.GetKeyDown(KeyCode.D) && transform.position.x < 0.5f)
         {
-            transform.Translate(shift, 0, 0);
+            //transform.Translate(shift, 0, 0);
+            transform.DOMoveX(transform.position.x + shift, 0.5f);
         }
         #endregion
     }
@@ -170,7 +172,7 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(other.gameObject);//süre olarak Destroy(other.gameObject,0.2f)-> 2sn sonra kaybolmak demektir
             score += 10;
-            Debug.Log("Puan :" + score);
+            Debug.Log("Puan: " + score);
         }
 
     }
