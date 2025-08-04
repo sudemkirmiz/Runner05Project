@@ -1,4 +1,5 @@
-﻿using UnityEditor.Experimental.GraphView;
+﻿using System.Runtime.CompilerServices;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -15,6 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public bool isLeft, isMiddle, isRight;
     [HideInInspector] public string denemeforgizleme; //gizleme1
     [System.NonSerialized] public string denemeforgizleme2; //gizleme2
+    int score = 0;
 
     //bool ile sürünmeden kurtulalım
     public bool isDead;
@@ -159,7 +161,18 @@ public class PlayerController : MonoBehaviour
             Debug.Log("çarpıştık" +other.gameObject.name);
             myAnim.SetBool("Death", true);
             isDead = true;
+        }  
+    }
+    //coinin yok olmasının kodu
+    private void OnTriggerEnter(Collider other) //isTrigger ile kontrol edilen yapının içine girdiğinde neler yapılacağı
+    {
+        if (other.CompareTag("coin"))
+        {
+            Destroy(other.gameObject);//süre olarak Destroy(other.gameObject,0.2f)-> 2sn sonra kaybolmak demektir
+            score += 10;
+            Debug.Log("Puan :" + score);
         }
+
     }
 
 }
