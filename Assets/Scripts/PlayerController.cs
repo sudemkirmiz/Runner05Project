@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     {
         isMiddle = true; // Başlangıçta karakter ortadadır
         //transform.position=new Vector3 (0, 0, 5);
+        myAnim.SetBool("run", true);
     }
 
     // Update is called once per frame
@@ -131,17 +132,27 @@ public class PlayerController : MonoBehaviour
     {
         #region karakter sinirlama
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
+
+        // 1.yöntem
+        if (Input.GetKeyDown(KeyCode.A) && transform.position.x > -0.5f)
+        {
+            transform.Translate(new Vector3(-shift, 0, 0));
+        }
+        else if (Input.GetKeyDown(KeyCode.D) && transform.position.x < 0.5f)
+        {
+            transform.Translate(shift, 0, 0);
+        }
         #endregion
     }
     //oncollisionenter=>fiziksel çarpışmaları algılayan özel bir fonksiyondur.başka bir Collider ile çarpışma olduğunda otomatik olarak çağrılır.Scriptin
     //bağlı olduğu GameObject'te Collider bileşeni bulunmalı (örneğin: BoxCollider, SphereCollider vs.) Ayrıca Rigidbody bileşeni olmalı(dinamik fizik için).
-    private void OnCollisionEnter(Collision other)//Bu fonksiyon, bir Rigidbody'ye sahip obje başka bir Collider'la çarpıştığında otomatik olarak çalışır.other->other, çarpıştığın nesneyle ilgili tüm bilgileri içerir.
-    {
+    private void OnCollisionEnter(Collision other)//Bu fonksiyon, bir Rigidbody'ye sahip obje başka bir Collider'la çarpıştığında otomatik olarak çalışır.
+    {                                             //other, çarpıştığın nesneyle ilgili tüm bilgileri içerir.
         //Debug.Log("çarpıştık");
         if (other.gameObject.CompareTag("obstacle"))
         {
             Debug.Log("çarpıştık" +other.gameObject.name);
-           
+            myAnim.SetBool("Death", true);
         }
     }
 
