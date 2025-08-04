@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public string denemeforgizleme; //gizleme1
     [System.NonSerialized] public string denemeforgizleme2; //gizleme2
 
+    //bool ile sürünmeden kurtulalım
+    public bool isDead;
+
     void Start()
     {
         isMiddle = true; // Başlangıçta karakter ortadadır
@@ -130,6 +133,8 @@ public class PlayerController : MonoBehaviour
 
     void MoveCharacter()
     {
+        if(isDead) return; //eğer ölüm doğru ise alttaki hiçbir şeyi çalıştırma!!!
+
         #region karakter sinirlama
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
@@ -153,6 +158,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("çarpıştık" +other.gameObject.name);
             myAnim.SetBool("Death", true);
+            isDead = true;
         }
     }
 
