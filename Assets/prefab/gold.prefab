@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5467294840699945237}
   - component: {fileID: 3144125622938666186}
   m_Layer: 0
-  m_Name: "alt\u0131n"
+  m_Name: gold
   m_TagString: coin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
