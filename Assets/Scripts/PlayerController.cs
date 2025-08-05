@@ -17,12 +17,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public bool isLeft, isMiddle, isRight;
     [HideInInspector] public string denemeforgizleme; //gizleme1
     [System.NonSerialized] public string denemeforgizleme2; //gizleme2
-    int score = 0;
+    public int score = 0;
 
     //bool ile sürünmeden kurtulalım
     public bool isDead;
 
     [HideInInspector] public bool isStart; //public olmasının nedeni buna UI managerdan erişmek
+
+    [SerializeField] public float floatscore; //oyunda geçen süreyi tutacağız
+    [SerializeField] public float passedTime;
 
     void Start()
     {
@@ -33,7 +36,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // transform.Translate(Vector3.forward * speed * Time.deltaTime);//Karakteri sürekli olarak ileri (Z ekseni) yönde hareket ettirir
-
+       
         MoveCharacter();
 
         karakterHareket();
@@ -139,6 +142,17 @@ public class PlayerController : MonoBehaviour
         if (!isStart) return; //eğer karakter başlamamışsa
         if(isDead) return; //eğer ölüm doğru ise alttaki hiçbir şeyi çalıştırma!!!
 
+        floatscore += Time.deltaTime;
+        if(floatscore > 1)
+        {
+            score += 1;
+            floatscore = 0;
+        }
+        if(passedTime > 10)
+        {
+            speed += 5f;
+            passedTime= 0;
+        }
         #region karakter sinirlama
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
