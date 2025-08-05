@@ -12,7 +12,8 @@ public class CamFallow : MonoBehaviour
     }
     private void LateUpdate()
     {
-        transform.position =new Vector3(transform.position.x,transform.position.y,Player.position.z+zoffset);  //direkt adamýn kendi pozisyonunu kameraya baðladýk
+        transform.position =new Vector3(transform.position.x,transform.position.y,Player.position.z+zoffset);  
+        //direkt adamýn kendi pozisyonunu kameraya baðladýk
     }
     //update
     //fixed update hareket kodlarý burada olmasý gerekir

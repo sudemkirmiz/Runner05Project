@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header ("Elements")]
     [SerializeField] Rigidbody rb;
-    [SerializeField] Animator myAnim;
+    [SerializeField] public Animator myAnim;
     [Header ("Settings")]
     [Tooltip("bu değişken oyuncunun hızını ifade eder")] //speed üzerine gelince yazacak ipucu
     [SerializeField] public float speed;
@@ -22,11 +22,13 @@ public class PlayerController : MonoBehaviour
     //bool ile sürünmeden kurtulalım
     public bool isDead;
 
+    [HideInInspector] public bool isStart; //public olmasının nedeni buna UI managerdan erişmek
+
     void Start()
     {
         isMiddle = true; // Başlangıçta karakter ortadadır
         //transform.position=new Vector3 (0, 0, 5);
-        myAnim.SetBool("run", true);
+       // myAnim.SetBool("run", true);
     }
     void Update()
     {
@@ -134,6 +136,7 @@ public class PlayerController : MonoBehaviour
 
     void MoveCharacter()
     {
+        if (!isStart) return; //eğer karakter başlamamışsa
         if(isDead) return; //eğer ölüm doğru ise alttaki hiçbir şeyi çalıştırma!!!
 
         #region karakter sinirlama
