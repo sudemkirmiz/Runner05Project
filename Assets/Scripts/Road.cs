@@ -2,18 +2,25 @@ using UnityEngine;
 
 public class Road : MonoBehaviour
 {
-    GameObject Player; //serialize kullanmayýz çünkü yollarýmýz dinamik olarak oluþuyor kod kod dosyasýna eriþeceðiz
+    // Oyuncuya referans tutacak deðiþken
+    GameObject Player;
+
+    // Baþlangýçta bir kere çalýþýr
     void Start()
     {
-        Player = GameObject.FindGameObjectWithTag("Player");//player etiketlerine sahip olan koda eriþim saðlýyoruz
+        // Sahnedeki "Player" tag'ine sahip GameObject bulunur ve referansa atanýr
+        Player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    // Update is called once per frame
+    // Her karede bir kere çalýþýr
     void Update()
-    {    //oyuncunun pozisyonu ile yolun pozisyonu arasýndaki fark 25'ten büyük olduðunda 
-        if((Player.transform.position.z-this.transform.position.z) > 25)
+    {
+        // Oyuncunun Z ekseni konumu ile bu yol parçasýnýn konumu arasýndaki fark 25'ten büyükse
+        if ((Player.transform.position.z - this.transform.position.z) > 25)
         {
+            // Bu yol parçasý artýk arkada kaldý, bu yüzden yok edilir
             Destroy(this.gameObject);
         }
     }
 }
+
