@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
     //bool ile sürünmeden kurtulalım
     public bool isDead;
-    public bool is2XActive, isShieldActive, isSpeedUpActive;
+    public bool is2XActive, isShieldActive, isMagnetActive;
     public float beforeSpeed;
 
     [SerializeField] public int Health;
@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+       
         isMiddle = true; // Başlangıçta karakter ortadadır
         //transform.position=new Vector3 (0, 0, 5);
        // myAnim.SetBool("run", true);
@@ -237,7 +238,8 @@ public class PlayerController : MonoBehaviour
                 case CollectablesEnum.SpeedUp:
                     AddSpeed(collectables.ToBeAddedSpeed);
                     break;
-                case CollectablesEnum.none:
+                case CollectablesEnum.Magnet:
+                    ActiveMagnet();
                     break;
                 default:
                     break;
@@ -245,6 +247,17 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);//süre olarak Destroy(other.gameObject,0.2f)-> 2sn sonra kaybolmak demektir   
         }
     }
+
+    void ActiveMagnet()
+    {
+        isMagnetActive = true;
+        Invoke("DeactivateMagnet", 5f);
+    }
+    void DeactivateMagnet()
+    {
+        isMagnetActive = false;
+    }
+
     void AddSpeed(int toBeAddedSpeed)
     {
         beforeSpeed = speed;
@@ -275,9 +288,9 @@ public class PlayerController : MonoBehaviour
             isDead = true;
         }
     }
-    void AddScore(int ToBeAddScore)
+    void AddScore(int ToBeAddedScore)
     {
-        score += ToBeAddScore;
+        score += ToBeAddedScore;
     }
     //bu fonksiyon kalkanı aktif yapar
     void ActiveShield()

@@ -5,5 +5,6 @@ public enum CollectablesEnum
  Score2X, //cezayý katlama
  Health, //can 
  SpeedUp, //ceza için kullanacaðýz
+ Magnet,
  none
 }

@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     // Oluþturulan yol objelerinin hiyerarþide toplanacaðý ebeveyn obje
     [SerializeField] Transform roadParent;
 
+    [SerializeField] GameObject[] collactables; //dinamik olarak oluþturacaðým kodlarý tutan dizi
+
     // Yol parçalarýnýn uzunluðu (Z ekseni boyunca)
     float roadLength = 20;
 
@@ -28,6 +30,19 @@ public class GameManager : MonoBehaviour
         {
             GenerateRoad(); // Yeni yol parçasý oluþtur
         }
+        SpamCollectable();
+    }
+
+    void SpamCollectable()
+    {
+        GameObject collectableObject = Instantiate(collactables[Random.Range(0, collactables.Length)], Player.position + new Vector3(0, 0.5f, 50f), Quaternion.identity);
+        Collectables collectable = collectableObject.GetComponent<Collectables>();
+        if (collectable.CollectablesEnum == CollectablesEnum.Coin)
+        {
+            collectable.Player = Player.gameObject;
+        }
+        Invoke("SpawmCollectable", Random.Range(10f, 20f));
+
     }
 
     // Her karede bir kez çalýþýr

@@ -7,4 +7,13 @@ public class Collectables : MonoBehaviour
     public int ToBeAddedHealth;
     public int ToBeAddedScore;
     public int ToBeAddedSpeed;
+    public GameObject Player;
+
+    private void Start()
+    {
+        if (CollectablesEnum == CollectablesEnum.Coin)
+        {
+            Player = GameObject.FindFirstObjectByType<PlayerController>().gameObject; //player objemize eriþtik
+        }
+    }
 }
