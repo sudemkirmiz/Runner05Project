@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using System;
 using System.Runtime.CompilerServices;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -21,6 +22,9 @@ public class PlayerController : MonoBehaviour
 
     //bool ile sürünmeden kurtulalım
     public bool isDead;
+    public bool is2XActive, isShieldActive, isSpeedUpActive;
+
+    [SerializeField] public int Health;
 
     [HideInInspector] public bool isStart; //public olmasının nedeni buna UI managerdan erişmek
 
@@ -175,23 +179,61 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter(Collision other)//Bu fonksiyon, bir Rigidbody'ye sahip obje başka bir Collider'la çarpıştığında otomatik olarak çalışır.
     {                                             //other, çarpıştığın nesneyle ilgili tüm bilgileri içerir.
         //Debug.Log("çarpıştık");
-        if (other.gameObject.CompareTag("obstacle"))
+        if (other.gameObject.CompareTag("obstacle")) //eğer çarpılan nesne "obstacle" tag'ine sahipse
         {
-            Debug.Log("çarpıştık" +other.gameObject.name);
-            myAnim.SetBool("Death", true);
+            if (isShieldActive) //kalkan aktifse
+            {
+                Destroy(other.gameObject); // Engeli yok et
+                isShieldActive = false;// Kalkanı devre dışı bırak
+            }
+            
+           // Debug.Log("çarpıştık" +other.gameObject.name);
+            myAnim.SetBool("Death", true); // Ölüm animasyonunu başlat
             isDead = true;
         }  
     }
     //coinin yok olmasının kodu
     private void OnTriggerEnter(Collider other) //isTrigger ile kontrol edilen yapının içine girdiğinde neler yapılacağı
     {
-        if (other.CompareTag("coin"))
+        if (other.CompareTag("Collectables"))
         {
-            Destroy(other.gameObject);//süre olarak Destroy(other.gameObject,0.2f)-> 2sn sonra kaybolmak demektir
-            score += 10;
-            Debug.Log("Puan: " + score);
+            Collectables collectables = other.GetComponent<Collectables>(); // collactables kod dosyasına erişim sağladım
+
+            switch (collectables.CollectablesEnum)
+            {
+                case CollectablesEnum.Coin:
+                    AddScore(10);
+                    break;
+                case CollectablesEnum.Shield:
+                    ActiveShield();
+                    break;
+                case CollectablesEnum.Score2X:
+                    break;
+                case CollectablesEnum.Health:
+                    break;
+                case CollectablesEnum.SpeedUp:
+                    break;
+                case CollectablesEnum.none:
+                    break;
+                default:
+                    break;
+            }
+            Destroy(other.gameObject);//süre olarak Destroy(other.gameObject,0.2f)-> 2sn sonra kaybolmak demektir   
         }
-
     }
-
+    void AddScore(int ToBeAddScore)
+    {
+        score += ToBeAddScore;
+    }
+    //bu fonksiyon kalkanı aktif yapar
+    void ActiveShield()
+    {
+        isShieldActive = true;
+        Invoke("DeactiveShield", 5f);//5 sn sonra DeactiveShield() fonksiyonu otomatik olarak çağrılır.
+    }
+    //bu fonksiyon kalkanı pasif yapar
+    void DeactiveShield()
+    {
+        isShieldActive = false;
+    }
 }

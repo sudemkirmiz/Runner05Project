@@ -364,7 +364,6 @@ Transform:
   - {fileID: 8493177469696582821}
   - {fileID: 2590107003882194127}
   - {fileID: 6405324457426989276}
-  - {fileID: 6746893720467196520}
   - {fileID: 3364068019547929195}
   - {fileID: 3137650652055650267}
   - {fileID: 3998170110676270823}
@@ -467,7 +466,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 161145150718187016, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.95
+      value: 8.33
       objectReference: {fileID: 0}
     - target: {fileID: 161145150718187016, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -563,6 +562,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "alt\u0131n (1)"
       objectReference: {fileID: 0}
+    - target: {fileID: 1535662298930229557, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
+      propertyPath: m_TagString
+      value: Collectables
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -624,6 +627,10 @@ PrefabInstance:
     - target: {fileID: 1535662298930229557, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
       propertyPath: m_Name
       value: "alt\u0131n (7)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1535662298930229557, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
+      propertyPath: m_TagString
+      value: Collectables
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -777,7 +784,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 161145150718187016, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.84
+      value: 6.93
       objectReference: {fileID: 0}
     - target: {fileID: 161145150718187016, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -971,7 +978,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 161145150718187016, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.62
+      value: 0.67
       objectReference: {fileID: 0}
     - target: {fileID: 161145150718187016, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1199,6 +1206,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "alt\u0131n"
       objectReference: {fileID: 0}
+    - target: {fileID: 1535662298930229557, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
+      propertyPath: m_TagString
+      value: Collectables
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1227,7 +1238,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 161145150718187016, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 11.34
+      value: 10.15
       objectReference: {fileID: 0}
     - target: {fileID: 161145150718187016, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1260,6 +1271,10 @@ PrefabInstance:
     - target: {fileID: 1535662298930229557, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
       propertyPath: m_Name
       value: "alt\u0131n (2)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1535662298930229557, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
+      propertyPath: m_TagString
+      value: Collectables
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1323,6 +1338,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "alt\u0131n (11)"
       objectReference: {fileID: 0}
+    - target: {fileID: 1535662298930229557, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
+      propertyPath: m_TagString
+      value: Collectables
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1351,7 +1370,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 161145150718187016, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.72
+      value: 0.28
       objectReference: {fileID: 0}
     - target: {fileID: 161145150718187016, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1384,6 +1403,10 @@ PrefabInstance:
     - target: {fileID: 1535662298930229557, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
       propertyPath: m_Name
       value: "alt\u0131n (8)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1535662298930229557, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
+      propertyPath: m_TagString
+      value: Collectables
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1465,68 +1488,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5375955542490689502, guid: 73882b1fd4268c048b495f3ef9c3fe60, type: 3}
   m_PrefabInstance: {fileID: 6547189523603068594}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &6889742988782034016
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 181176833526701354}
-    m_Modifications:
-    - target: {fileID: 161145150718187016, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 161145150718187016, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 161145150718187016, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 8.12
-      objectReference: {fileID: 0}
-    - target: {fileID: 161145150718187016, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 161145150718187016, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 161145150718187016, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 161145150718187016, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 161145150718187016, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 161145150718187016, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 161145150718187016, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1535662298930229557, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
-      propertyPath: m_Name
-      value: "alt\u0131n (9)"
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
---- !u!4 &6746893720467196520 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 161145150718187016, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
-  m_PrefabInstance: {fileID: 6889742988782034016}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7751721600184028636
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1578,6 +1539,10 @@ PrefabInstance:
     - target: {fileID: 1535662298930229557, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
       propertyPath: m_Name
       value: "alt\u0131n (12)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1535662298930229557, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
+      propertyPath: m_TagString
+      value: Collectables
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1640,6 +1605,10 @@ PrefabInstance:
     - target: {fileID: 1535662298930229557, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
       propertyPath: m_Name
       value: "alt\u0131n (3)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1535662298930229557, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
+      propertyPath: m_TagString
+      value: Collectables
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
