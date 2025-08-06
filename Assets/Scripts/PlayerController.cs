@@ -1,6 +1,7 @@
 ﻿using DG.Tweening;
 using System;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
     //bool ile sürünmeden kurtulalım
     public bool isDead;
     public bool is2XActive, isShieldActive, isSpeedUpActive;
+    public float beforeSpeed;
 
     [SerializeField] public int Health;
 
@@ -181,17 +183,34 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("çarpıştık");
         if (other.gameObject.CompareTag("obstacle")) //eğer çarpılan nesne "obstacle" tag'ine sahipse
         {
+            int damage=other.gameObject.GetComponent<Obstacle>().damage;//burada damage değişkenine obstacle sınıfındaki damage değişkenini atıyoruz
+
             if (isShieldActive) //kalkan aktifse
             {
                 Destroy(other.gameObject); // Engeli yok et
                 isShieldActive = false;// Kalkanı devre dışı bırak
             }
-            
-           // Debug.Log("çarpıştık" +other.gameObject.name);
-            myAnim.SetBool("Death", true); // Ölüm animasyonunu başlat
-            isDead = true;
+            else
+            {
+                CheckHealth(damage,other.gameObject);        
+            }
         }  
     }
+
+    private void CheckHealth(int damage,GameObject other)
+    {
+        Health -= damage;
+        if(Health <= 0)
+        {
+            myAnim.SetBool("Death", true);
+            isDead = true;
+        }
+        else
+        {
+            Destroy(other.gameObject);
+        }
+    }
+
     //coinin yok olmasının kodu
     private void OnTriggerEnter(Collider other) //isTrigger ile kontrol edilen yapının içine girdiğinde neler yapılacağı
     {
@@ -202,16 +221,21 @@ public class PlayerController : MonoBehaviour
             switch (collectables.CollectablesEnum)
             {
                 case CollectablesEnum.Coin:
-                    AddScore(10);
+                    AddScore(collectables.ToBeAddedScore);
+                    //AddScore(10);
                     break;
                 case CollectablesEnum.Shield:
                     ActiveShield();
                     break;
                 case CollectablesEnum.Score2X:
+                    ActivateBonus();
                     break;
                 case CollectablesEnum.Health:
+                    //AddHealth(1);
+                    AddHealth(collectables.ToBeAddedHealth);//daha dinamik can eklemeyi sağladık
                     break;
                 case CollectablesEnum.SpeedUp:
+                    AddSpeed(collectables.ToBeAddedSpeed);
                     break;
                 case CollectablesEnum.none:
                     break;
@@ -219,6 +243,36 @@ public class PlayerController : MonoBehaviour
                     break;
             }
             Destroy(other.gameObject);//süre olarak Destroy(other.gameObject,0.2f)-> 2sn sonra kaybolmak demektir   
+        }
+    }
+    void AddSpeed(int toBeAddedSpeed)
+    {
+        beforeSpeed = speed;
+        speed += toBeAddedSpeed;
+        Invoke("BackToOrijinalSpeed", 5f);
+    }
+    void BackToOrijinalSpeed()
+    {
+        speed = beforeSpeed;
+    }
+
+    void ActivateBonus()
+    {
+        is2XActive = true;
+        Invoke("DeActivateBonus", 5f);
+    }
+    void DeActivateBonus()
+    {
+        is2XActive = false;
+    }
+    //can ekleme fonksiyonu
+    void AddHealth(int TobeAddedHealth)
+    {
+        Health += TobeAddedHealth;
+        if (Health <= 0)
+        {
+            myAnim.SetBool("Death", true);
+            isDead = true;
         }
     }
     void AddScore(int ToBeAddScore)
