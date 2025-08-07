@@ -146,6 +146,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CollectablesEnum: 0
   ToBeAddedHealth: 0
-  ToBeAddedScore: 0
+  ToBeAddedScore: 10
   ToBeAddedSpeed: 0
   Player: {fileID: 0}
