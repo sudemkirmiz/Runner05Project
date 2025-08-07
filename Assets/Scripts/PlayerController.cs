@@ -35,6 +35,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float passedTime;
     //sesler için
     [SerializeField] AudioClip BonusSound,CoinSound,DeathSound,MagnetCoinSound,ShieldSound;
+    //oyuncu sesleri için
+    [SerializeField] AudioSource PlayerSound;
+
+    //vfx (görsel efektler partikül sistemleri)
+    [SerializeField] GameObject CoinCollectedVFX, deathVFX, HealthDeclineVFX, MagnetVFX, WallBreakVFX, ShieldVFX;
     void Start()
     {
        
@@ -194,6 +199,8 @@ public class PlayerController : MonoBehaviour
             {
                 Destroy(other.gameObject); // Engeli yok et
                 isShieldActive = false;// Kalkanı devre dışı bırak
+                GameObject vfx = Instantiate(WallBreakVFX, other.transform.position, Quaternion.identity);
+                Destroy(vfx, 1f);
             }
             else
             {
@@ -208,11 +215,18 @@ public class PlayerController : MonoBehaviour
         if(Health <= 0)
         {
             myAnim.SetBool("Death", true);
+            PlayerSound.PlayOneShot(DeathSound); //tek seferliğine ölüm sesi çalacak
+            GameObject vfx = Instantiate(deathVFX, transform.position, Quaternion.identity);
             isDead = true;
         }
         else
         {
             Destroy(other.gameObject);
+            GameObject vfx = Instantiate(WallBreakVFX, other.transform.position, Quaternion.identity);
+            Destroy(vfx, 1f);
+
+            GameObject healthvfx=Instantiate(HealthDeclineVFX,transform.position,Quaternion.identity,this.transform);
+            Destroy(healthvfx, 1f); 
         }
     }
 
@@ -255,6 +269,8 @@ public class PlayerController : MonoBehaviour
     void ActiveMagnet()
     {
         isMagnetActive = true;
+        GameObject vfx = Instantiate(MagnetVFX, this.transform.position, Quaternion.identity, this.transform);
+        Destroy(vfx, 5f);
         Invoke("DeactivateMagnet", 5f);
     }
     void DeactivateMagnet()
@@ -275,7 +291,9 @@ public class PlayerController : MonoBehaviour
 
     void ActivateBonus()
     {
+
         is2XActive = true;
+        AudioSource.PlayClipAtPoint(BonusSound, transform.position); //sesi olduğu noktada çalıyor
         Invoke("DeActivateBonus", 5f);
     }
     void DeActivateBonus()
@@ -289,11 +307,28 @@ public class PlayerController : MonoBehaviour
         if (Health <= 0)
         {
             myAnim.SetBool("Death", true);
+            PlayerSound.PlayOneShot(DeathSound);
+            GameObject vfx = Instantiate(deathVFX, transform.position, Quaternion.Euler(-90, 0, 0));
             isDead = true;
+            
         }
     }
     void AddScore(int ToBeAddedScore)
     {
+        if(isMagnetActive)
+        {
+            PlayerSound.clip = MagnetCoinSound;
+            PlayerSound.Play();
+        }
+        else
+        {
+            PlayerSound.clip = CoinSound;
+            PlayerSound.Play();
+        }
+        //objenin klonunu oluşturur (nesnenin prefabı,pozisyonu,referansı)
+        GameObject vfx = Instantiate(CoinCollectedVFX,transform.position+new Vector3(0,1,0),Quaternion.identity,this.transform);
+        Destroy(vfx,1f);
+
         if (is2XActive)
         {
             ToBeAddedScore += 2;
@@ -304,6 +339,9 @@ public class PlayerController : MonoBehaviour
     void ActiveShield()
     {
         isShieldActive = true;
+        PlayerSound.PlayOneShot(ShieldSound);
+        GameObject vfx = Instantiate(ShieldVFX, transform.position,Quaternion.identity,this.transform);
+        Destroy(vfx,5f);
         Invoke("DeactiveShield", 5f);//5 sn sonra DeactiveShield() fonksiyonu otomatik olarak çağrılır.
     }
     //bu fonksiyon kalkanı pasif yapar

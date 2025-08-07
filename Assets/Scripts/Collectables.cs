@@ -29,4 +29,12 @@ public class Collectables : MonoBehaviour
             }
         }
     }
+    //obstacle objelerinin içinde veya üstünde oluþturmamasý için
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Obstacle"))
+        {
+            Destroy(other.gameObject);
+        }
+    }
 }
