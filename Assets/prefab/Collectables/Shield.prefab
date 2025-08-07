@@ -716,7 +716,7 @@ Transform:
   m_GameObject: {fileID: 6750908213199077648}
   serializedVersion: 2
   m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.00000009689331, y: -5.294176e-16, z: 0.000000012111664}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -771,6 +771,7 @@ MonoBehaviour:
   ToBeAddedHealth: 0
   ToBeAddedScore: 0
   ToBeAddedSpeed: 0
+  Player: {fileID: 0}
 --- !u!65 &3744647487328109981
 BoxCollider:
   m_ObjectHideFlags: 0

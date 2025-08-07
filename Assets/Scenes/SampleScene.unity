@@ -764,6 +764,12 @@ MonoBehaviour:
   - {fileID: 8378389637904950071, guid: 3e021e6efe3263d4484dda6f2d6be87f, type: 3}
   Player: {fileID: 3547736789374903675}
   roadParent: {fileID: 1997740088}
+  collactables:
+  - {fileID: 3073589522717277055, guid: d4efa66d3fce8e84791b340ef0f89520, type: 3}
+  - {fileID: 7355944676169344908, guid: 46c8e0ba3a6b8c24d8d4a7853b613b6a, type: 3}
+  - {fileID: 6325450114085707026, guid: 4cc5cbc02b1bf47468ed412a072295ab, type: 3}
+  - {fileID: 9102128060181932948, guid: efcee579876f5bd4c8224b768cf1395e, type: 3}
+  - {fileID: 6750908213199077648, guid: ddd7d9c7c9461654592329c3551902e3, type: 3}
 --- !u!4 &637868994
 Transform:
   m_ObjectHideFlags: 0
@@ -4425,6 +4431,11 @@ MonoBehaviour:
   denemeforgizleme: 
   score: 0
   isDead: 0
+  is2XActive: 0
+  isShieldActive: 0
+  isMagnetActive: 0
+  beforeSpeed: 0
+  Health: 3
   isStart: 0
   floatscore: 0
   passedTime: 0

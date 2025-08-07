@@ -1078,10 +1078,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: "alt\u0131n"
       objectReference: {fileID: 0}
-    - target: {fileID: 1535662298930229557, guid: 5130eebb41577764ea199be7886ca11c, type: 3}
-      propertyPath: m_TagString
-      value: Collectables
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

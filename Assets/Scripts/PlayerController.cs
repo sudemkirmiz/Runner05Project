@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     public bool isDead;
     public bool is2XActive, isShieldActive, isMagnetActive;
     public float beforeSpeed;
+    public bool isMove;
 
     [SerializeField] public int Health;
 
@@ -32,7 +33,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] public float floatscore; //oyunda geçen süreyi tutacağız
     [SerializeField] public float passedTime;
-
+    //sesler için
+    [SerializeField] AudioClip BonusSound,CoinSound,DeathSound,MagnetCoinSound,ShieldSound;
     void Start()
     {
        
@@ -164,16 +166,18 @@ public class PlayerController : MonoBehaviour
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
         // 1.yöntem
-        if (Input.GetKeyDown(KeyCode.A) && transform.position.x > -0.5f)
+        if (Input.GetKeyDown(KeyCode.A) && transform.position.x > -0.5f && !isMove)
         {
 
             //transform.Translate(new Vector3(-shift, 0, 0)); //ışınlanarak gidiyor
-            transform.DOMoveX(transform.position.x - shift, 0.5f).SetEase(Ease.Linear); //ışınlanmadan karakterin sağ sol doğal hareketi
+            transform.DOMoveX(transform.position.x - shift, 0.5f).SetEase(Ease.Linear).OnComplete(isMoveToFalse); //ışınlanmadan karakterin sağ sol doğal hareketi
+            isMove = true;
         }
-        else if (Input.GetKeyDown(KeyCode.D) && transform.position.x < 0.5f)
+        else if (Input.GetKeyDown(KeyCode.D) && transform.position.x < 0.5f && !isMove)
         {
             //transform.Translate(shift, 0, 0);
-            transform.DOMoveX(transform.position.x + shift, 0.5f).SetEase(Ease.Linear);
+            transform.DOMoveX(transform.position.x + shift, 0.5f).SetEase(Ease.Linear).OnComplete(isMoveToFalse);
+            isMove = true;
         }
         #endregion
     }
@@ -290,6 +294,10 @@ public class PlayerController : MonoBehaviour
     }
     void AddScore(int ToBeAddedScore)
     {
+        if (is2XActive)
+        {
+            ToBeAddedScore += 2;
+        }
         score += ToBeAddedScore;
     }
     //bu fonksiyon kalkanı aktif yapar
@@ -302,5 +310,9 @@ public class PlayerController : MonoBehaviour
     void DeactiveShield()
     {
         isShieldActive = false;
+    }
+    void isMoveToFalse()
+    {
+        isMove=false;
     }
 }

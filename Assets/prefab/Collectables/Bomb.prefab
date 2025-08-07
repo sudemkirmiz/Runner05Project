@@ -103,7 +103,7 @@ MonoBehaviour:
   CollectablesEnum: 4
   ToBeAddedHealth: 0
   ToBeAddedScore: 0
-  ToBeAddedSpeed: 0
+  ToBeAddedSpeed: -1
   Player: {fileID: 0}
 --- !u!65 &-6643275198372631504
 BoxCollider:
